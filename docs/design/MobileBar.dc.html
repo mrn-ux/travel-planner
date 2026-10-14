@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="height:64px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--border);font-family:Inter,sans-serif">
+<svg width="20" height="20" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9.5" stroke="#0E6F8E" stroke-width="1.5"></circle><path d="M11 4.5l2.6 6.5L11 17.5 8.4 11z" fill="#0E6F8E"></path></svg>
+<span style="font-family:Spectral,serif;font-weight:600;font-size:18px;color:var(--text);margin-right:4px">Faro</span>
+<span style="font-size:13px;font-weight:500;padding:8px 8px;border-radius:4px;white-space:nowrap;background:{{ pb }};color:{{ pc }}">Plan a trip</span>
+<span style="font-size:13px;font-weight:500;padding:8px 8px;border-radius:4px;white-space:nowrap;background:{{ tb }};color:{{ tc }}">My trips</span>
+<div style="margin-left:auto;width:32px;height:32px;flex:none;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500">MR</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { const t = this.props.active === 'trips'; return { pb: t ? 'transparent' : '#E1F0F4', pc: t ? '#566269' : '#0E6F8E', tb: t ? '#E1F0F4' : 'transparent', tc: t ? '#0E6F8E' : '#566269' }; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!-- @dsCard group="Components" viewport="700x900" name="Travel" subtitle="DestinationCard, ComparisonTable, DayItineraryCard, BudgetBreakdown, BookingStepper" -->
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<div id="root" style="background:var(--bg);padding:16px"></div>
+<script type="text/babel">
+const { DestinationCard, ComparisonTable, DayItineraryCard, BudgetBreakdown, BookingStepper, StatusBadge } = window.FaroDesignSystem_c83241;
+function Demo(){
+  return (
+    <div style={{display:'flex',flexDirection:'column',gap:20}}>
+      <DestinationCard rank={1} name="Lisbon, Portugal" score={92} reasons={['Fits your budget with room to spare','Mild weather in November','Walkable, near the water']} />
+      <ComparisonTable
+        columns={[{key:'name',label:'Hotel'},{key:'rating',label:'Rating',sortable:true},{key:'price',label:'Price',align:'right',tabular:true,sortable:true}]}
+        sortKey="price"
+        rows={[
+          {name:'Hotel Avenida', rating:'4.6', price:<span style={{display:'flex',gap:8,justifyContent:'flex-end'}}>USD 184.00 <StatusBadge status="confirmed"/></span>},
+          {name:'Baixa House', rating:'4.3', price:<span style={{display:'flex',gap:8,justifyContent:'flex-end'}}>USD 152.00 <StatusBadge status="estimated"/></span>},
+        ]}
+      />
+      <DayItineraryCard day={1} date="12 Nov 2026" morning={[{title:'Belém Tower', duration:'1h 30m', cost:'USD 6.00', hours:'Open 10:00–17:30', travelTime:'15m'}]} afternoon={[{title:'Time Out Market', duration:'1h', cost:'USD 18.00'}]} />
+      <BudgetBreakdown
+        categories={[{label:'Hotels',amount:920},{label:'Transportation',amount:410},{label:'Activities',amount:260},{label:'Food',amount:380},{label:'Local transport',amount:90},{label:'Misc',amount:100}]}
+        total="USD 2,160.00" budget="USD 2,000.00" remaining="-USD 160.00"
+      />
+      <BookingStepper currentStep={2} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>

@@ -1,0 +1,9 @@
+:root{
+--bg:#F7F9F9;--surface:#FFFFFF;--surface-muted:#EEF1F2;--border:#DCE2E4;--border-strong:#C2CBCE;
+--text:#16242B;--text-secondary:#566269;--text-muted:#8C969B;
+--accent:#0E6F8E;--accent-hover:#0A5871;--accent-soft:#E1F0F4;
+--confirmed:#1F7A4D;--estimated:#B8752E;--unavailable:#76838A;
+--over-budget:#C2410C;--under-budget:#2F8F5B;--danger:#B3261E;--focus-ring:#0E6F8E;
+--chart-hotels:#0E6F8E;--chart-transportation:#B8752E;--chart-activities:#2F8F5B;--chart-food:#B3261E;--chart-local-transport:#6B4E8C;--chart-misc:#5F6B6F;
+--modal-backdrop:rgba(22,36,43,0.4);
+}

@@ -1,0 +1,38 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# dependencies and build output
+node_modules/
+dist/
+build/
+*.log
+
+# editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Windows reserved-name artifact created by a stray redirect to NUL
+NUL
+nul
+
+# local tool state and worktrees
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+
+# TypeScript and test output
+*.tsbuildinfo
+coverage/
+.vite/
+
+# local scratch and secrets-adjacent files
+*.pem
+*.key
+.env.local
+*.bak

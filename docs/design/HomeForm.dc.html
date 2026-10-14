@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/styles.css">
+<script src="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/_ds_bundle.js"></script>
+</helmet>
+<div style="width:1280px;min-height:860px;background:var(--bg);font-family:Inter,sans-serif;color:var(--text)">
+<dc-import name="FaroBar" active="plan" menu="{{ menu }}" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:grid;grid-template-columns:360px minmax(480px,1fr);gap:16px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" hint-size="360px,860px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div style="font-family:Spectral,serif;font-size:20px;line-height:28px;font-weight:600;color:var(--text)">Trip details</div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="ghost" disabled="{{ notFilled }}" hint-size="auto,40px">New trip</x-import></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Destination" value="{{ to }}" placeholder="City, country or region" hint-size="100%,64px"></x-import>
+<div><div style="font-size:14px;font-weight:500;color:var(--text-secondary);margin-bottom:6px">Dates</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" value="{{ start }}" placeholder="Start" hint-size="100%,40px"></x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" value="{{ end }}" placeholder="End" hint-size="100%,40px"></x-import></div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Duration" value="{{ duration }}" placeholder="Number of days" hint-size="100%,64px"></x-import>
+<div><div style="font-size:14px;font-weight:500;color:var(--text-secondary);margin-bottom:6px">Travelers</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" type="number" value="{{ adults }}" placeholder="Adults" hint-size="100%,40px"></x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" type="number" value="{{ children }}" placeholder="Children" hint-size="100%,40px"></x-import></div></div>
+<div><div style="font-size:14px;font-weight:500;color:var(--text-secondary);margin-bottom:6px">Budget</div>
+<div style="display:grid;grid-template-columns:96px 1fr;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Select" value="USD" options="{{ currencies }}" hint-size="100%,40px"></x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" type="number" value="{{ budget }}" placeholder="Total" hint-size="100%,40px"></x-import></div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Select" label="Transport preference" value="{{ transport }}" options="{{ transportOpts }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Select" label="Accommodation preference" value="{{ stay }}" options="{{ stayOpts }}" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Activities / interests" value="{{ interests }}" placeholder="e.g. temples, food, hiking" hint-size="100%,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Special requirements" value="{{ special }}" placeholder="Anything we should know" hint-size="100%,64px"></x-import>
+</div>
+</x-import>
+<div style="display:flex;flex-direction:column;gap:8px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" disabled="{{ notFilled }}" hint-size="100%,40px">See results</x-import>
+<span style="font-size:13px;color:var(--text-secondary)">{{ hint }}</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;min-width:0;min-height:700px;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:16px;max-width:640px;width:100%;align-self:center">
+<sc-if value="{{ notFilled }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;align-items:center;gap:24px;padding-top:120px"><h1 style="font-family:Spectral,serif;font-weight:600;font-size:40px;line-height:48px;margin:0;text-align:center">Where do you want to go?</h1><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">I know my destination</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Recommend somewhere for me</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Just exploring</x-import></div></div></sc-if>
+<sc-if value="{{ filled }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.ChatMessage" role="agent" text="Hi. Tell me about the trip you're picturing, or fill in the details on the left. Both stay in sync." hint-size="100%,80px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.ChatMessage" role="user" text="8 days in Japan with my family, 2 adults and 2 children, leaving 18 Nov" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.ChatMessage" role="agent" text="I added Japan, 18–26 Nov 2026, and 2 adults and 2 children. A few more questions:" followUps="{{ followUps }}" hint-size="100%,120px"></x-import>
+</sc-if>
+</div>
+<div style="display:flex;gap:8px;align-items:flex-end"><div style="flex:1"><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,40px" placeholder="Message Faro…"></x-import></div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Send</x-import></div>
+</div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;filled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const f = !!this.props.filled;
+    return {
+      filled: f, notFilled: !f, menu: !!this.props.menu,
+      to: f ? 'Japan' : '', start: f ? '18 Nov 2026' : '', end: f ? '26 Nov 2026' : '',
+      duration: f ? '8 days' : '', adults: f ? '2' : '', children: f ? '2' : '', budget: f ? '4000.00' : '',
+      currencies: ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CHF', 'INR'],
+      transport: f ? 'Train' : 'None stated', transportOpts: ['None stated', 'Flight', 'Train', 'Bus', 'Car'],
+      stay: f ? 'Hotel' : 'No preference', stayOpts: ['No preference', 'Hotel', 'Guesthouse', 'Apartment'],
+      interests: f ? 'Temples, food, family attractions' : '', special: '',
+      followUps: ['Which airport are you leaving from?', 'How old are the children?', 'Any hotel category in mind?'],
+      hint: f ? 'All required details are set.' : 'Required: destination (or ask Faro to recommend one), dates or duration, travelers, budget.'
+    };
+  }
+}
+</script>
+</body>
+</html>

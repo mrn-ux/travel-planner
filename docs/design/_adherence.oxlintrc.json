@@ -1,0 +1,173 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/chat/**",
+              "components/core/**",
+              "components/travel/**",
+              "ui_kits/app/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Spectral|Inter))/i]",
+        "message": "Font not provided by the design system. Available: Spectral, Inter."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BookingStepper'] > JSXAttribute > JSXIdentifier[name!=/^(?:currentStep|key|ref|className|style|children)$/]",
+        "message": "<BookingStepper> doesn't accept that prop. Declared props: currentStep."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BudgetCategory'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|amount|key|ref|className|style|children)$/]",
+        "message": "<BudgetCategory> doesn't accept that prop. Declared props: label, amount."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|disabled|type|onClick|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, disabled, type, onClick, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost|danger)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost' | 'danger'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='type'] > Literal[value!=/^(?:button|submit)$/]",
+        "message": "<Button> type must be one of 'button' | 'submit'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|padding|children|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: title, padding, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ChatMessage'] > JSXAttribute > JSXIdentifier[name!=/^(?:role|text|followUps|results|key|ref|className|style|children)$/]",
+        "message": "<ChatMessage> doesn't accept that prop. Declared props: role, text, followUps, results."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ChatMessage'] > JSXAttribute[name.name='role'] > Literal[value!=/^(?:agent|user)$/]",
+        "message": "<ChatMessage> role must be one of 'agent' | 'user'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ComparisonColumn'] > JSXAttribute > JSXIdentifier[name!=/^(?:key|label|align|sortable|tabular|key|ref|className|style|children)$/]",
+        "message": "<ComparisonColumn> doesn't accept that prop. Declared props: key, label, align, sortable, tabular."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ComparisonColumn'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|right)$/]",
+        "message": "<ComparisonColumn> align must be one of 'left' | 'right'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ItineraryItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|duration|cost|hours|travelTime|key|ref|className|style|children)$/]",
+        "message": "<ItineraryItem> doesn't accept that prop. Declared props: title, duration, cost, hours, travelTime."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DestinationCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:rank|name|reasons|score|key|ref|className|style|children)$/]",
+        "message": "<DestinationCard> doesn't accept that prop. Declared props: rank, name, reasons, score."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='EmptyState'] > JSXAttribute > JSXIdentifier[name!=/^(?:message|actionLabel|onAction|key|ref|className|style|children)$/]",
+        "message": "<EmptyState> doesn't accept that prop. Declared props: message, actionLabel, onAction."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Input'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|placeholder|value|onChange|error|type|key|ref|className|style|children)$/]",
+        "message": "<Input> doesn't accept that prop. Declared props: label, placeholder, value, onChange, error, type."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='KPICard'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|valueColor|key|ref|className|style|children)$/]",
+        "message": "<KPICard> doesn't accept that prop. Declared props: label, value, valueColor."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Modal'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|children|actions|onClose|key|ref|className|style|children)$/]",
+        "message": "<Modal> doesn't accept that prop. Declared props: title, children, actions, onClose."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='NavItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:active|onClick|children|key|ref|className|style|children)$/]",
+        "message": "<NavItem> doesn't accept that prop. Declared props: active, onClick, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Select'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|onChange|options|key|ref|className|style|children)$/]",
+        "message": "<Select> doesn't accept that prop. Declared props: label, value, onChange, options."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatusBadge'] > JSXAttribute > JSXIdentifier[name!=/^(?:status|key|ref|className|style|children)$/]",
+        "message": "<StatusBadge> doesn't accept that prop. Declared props: status."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatusBadge'] > JSXAttribute[name.name='status'] > Literal[value!=/^(?:confirmed|estimated|unavailable)$/]",
+        "message": "<StatusBadge> status must be one of 'confirmed' | 'estimated' | 'unavailable'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "BookingStepper": { "replaces": [] },
+      "BudgetCategory": { "replaces": [] },
+      "Button": { "replaces": [] },
+      "Card": { "replaces": [] },
+      "ChatMessage": { "replaces": [] },
+      "ComparisonColumn": { "replaces": [] },
+      "ItineraryItem": { "replaces": [] },
+      "DestinationCard": { "replaces": [] },
+      "EmptyState": { "replaces": [] },
+      "Input": { "replaces": [] },
+      "KPICard": { "replaces": [] },
+      "Modal": { "replaces": [] },
+      "NavItem": { "replaces": [] },
+      "Select": { "replaces": [] },
+      "StatusBadge": { "replaces": [] }
+    },
+    "tokens": [
+      "--accent", "--accent-hover", "--accent-soft", "--bg", "--border", "--border-strong",
+      "--card-gap", "--card-padding", "--chart-activities", "--chart-food", "--chart-hotels",
+      "--chart-local-transport", "--chart-misc", "--chart-transportation", "--chat-message-gap",
+      "--confirmed", "--danger", "--estimated", "--focus-ring", "--font-display", "--font-sans",
+      "--form-field-gap", "--itinerary-step-gap", "--modal-backdrop", "--nav-height", "--over-budget",
+      "--page-padding-desktop", "--page-padding-mobile", "--radius-full", "--radius-lg", "--radius-md",
+      "--radius-sm", "--section-gap", "--shadow-modal", "--shadow-overlay", "--shadow-raised",
+      "--space-1", "--space-12", "--space-16", "--space-2", "--space-3", "--space-4", "--space-6", "--space-8",
+      "--surface", "--surface-muted", "--table-cell-px", "--table-cell-py", "--text",
+      "--text-2xl-lh", "--text-2xl-size", "--text-3xl-lh", "--text-3xl-size", "--text-base-lh", "--text-base-size",
+      "--text-lg-lh", "--text-lg-size", "--text-muted", "--text-secondary", "--text-sm-lh", "--text-sm-size",
+      "--text-xl-lh", "--text-xl-size", "--text-xs-lh", "--text-xs-size", "--unavailable", "--under-budget",
+      "--weight-body", "--weight-heading", "--weight-label"
+    ],
+    "fontFamilies": [
+      "Inter",
+      "Spectral"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+# Quickstart: Hotel and Transport Comparison
+
+Prerequisites: plans 001–003 running; `LITEAPI_API_KEY` (sandbox) and `DATA_USER_AGENT` set; a trip with a destination (country, optionally a city), dates, adults and budget. Optional: `DUFFEL_ACCESS_TOKEN` (test token) for flight offers. Updated 2026-10-13: steps 12-16 below cover the three-step flow, rooms, start place, flights and places.
+
+## Validate
+1. **Hotels table**: from `/` choose **See results** with a destination. `/search` shows Hotels active, filter row (check-in, check-out, guests, rooms, rating), columns Hotel, Category, Room types, Location, Price per night with badge, Rating, **View details**; only hotels in the chosen city are listed. Every price shows a certainty badge; rows are flagged sandbox.
+2. **Sorting**: sort by price, rating, location, AI recommendation; arrows update; order is correct (compare prices as decimals).
+3. **Filters**: set a rating filter; table narrows and the count updates; a filter matching nothing shows "No hotels match these filters" and *Clear filters* works.
+4. **Transport**: open Transport; choose a **Start country** (and optionally **Start city**) from the dropdowns (saved to the trip; the destination cannot be changed here); filter by mode (Flights, Trains, Buses ...). Rows show departure, arrival, duration, transfers; timetable rows show real times with an **Estimated** price (hover shows the basis and range, source "Faro estimate, not a quote"); with a Duffel test token, flights show sandbox offers (Confirmed, marked sandbox) with **Book this flight**, otherwise an Estimated price and duration with times Unavailable; trains and buses have **Select** only, no booking control. Transitous link and attribution are visible. (Superseded: "enter a From place" and "no actions column".)
+5. **Rate freshness**: open a hotel twice; the room list is fetched live each time (no cache hit in `http_cache` for `/hotels/rates`).
+6. **Details page**: `/hotels/<id>` shows gallery, provider description and reviews set apart, amenities, map pin with "© OpenStreetMap contributors", rooms with badges; select a room; breakdown, cancellation policy and **Continue to booking** appear.
+7. **Partial failure**: block the reviews host (hosts entry or network rule); reviews section shows "Not available"; the rest loads. Block Transitous; the Transport tab shows an error with Retry while Hotels still works.
+8. **Selection**: select a hotel and a transport option; both appear on the trip (plan 006 planner); selecting another asks to replace.
+9. **Nominatim budget**: geocode five new addresses; requests are ≥ 1 s apart (API log) and repeats hit `geocode_cache`.
+10. **Signed out**: every step redirects to `/login` (login first).
+11. **Provider swap**: change `HOTEL_PROVIDER` to an unknown value; the API refuses to start with a clear message (no silent fallback).
+12. **Three-step flow**: `/search` shows Hotels, Transport, Places to visit with a step caption; **Next** and **Previous** move between them, the tabs can be opened in any order, and the chosen hotel/transport/places are shown again in a box above the tab on return.
+13. **Rooms**: a party that does not fit one room finds no hotels at first; the search repeats once with the party spread over enough rooms and says so; the Rooms field can be changed. Hotels over the trip budget are hidden with a count; if none fit, the cheapest total is shown.
+14. **Flight booking entry**: with a Duffel test token select a sandbox flight and press **Book this flight**; the booking dialog opens (rules in constitution 3.5.0 / plan 007). With the token unset, flights show only Estimated rows and no Book button; a live token makes the API refuse to start.
+15. **Places to visit**: the tab lists up to 10 places (city: OpenStreetMap; whole country: Wikidata) with photos, hours or "Opening hours not stated", entry or "Entry not stated"; tick several and **Add ticked places**; they show **Chosen for your trip**; remove one; the plan link (`/trip/:id`) opens only once one place is chosen. Block the places source: the tab shows an error with Retry.
+16. **Pictures**: the page banner shows lodging photos on Hotels, vehicles on Transport and the chosen country on Places; with no photo found a plain banner is shown.

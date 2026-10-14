@@ -1,0 +1,6 @@
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:var(--text-base-size);line-height:var(--text-base-lh)}
+h1,h2,h3,h4,p{margin:0}
+a{color:var(--accent)}
+a:hover{color:var(--accent-hover)}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}

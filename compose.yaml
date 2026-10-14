@@ -1,0 +1,54 @@
+# Faro: three containers. Run `podman compose up --build` after creating a local .env (see .env.example).
+services:
+  postgres:
+    build:
+      context: ./db
+      dockerfile: Containerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-faro}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-faro}
+      POSTGRES_DB: ${POSTGRES_DB:-faro}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Containerfile
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-faro}:${POSTGRES_PASSWORD:-faro}@postgres:5432/${POSTGRES_DB:-faro}
+      PORT: "3000"
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8080}
+      SESSION_TTL_DAYS: ${SESSION_TTL_DAYS:-7}
+      REFRESH_CRON: ${REFRESH_CRON:-0 * * * *}
+      WARMUP_DESTINATIONS: ${WARMUP_DESTINATIONS:-30}
+      OLLAMA_NUM_CTX: ${OLLAMA_NUM_CTX:-32768}
+      GUEST_NATIONALITY: ${GUEST_NATIONALITY:-US}
+      HOTEL_PROVIDER: ${HOTEL_PROVIDER:-liteapi}
+      TRANSPORT_PROVIDER: ${TRANSPORT_PROVIDER:-transitous}
+      MAPS_PROVIDER: ${MAPS_PROVIDER:-osm}
+      PAYMENT_PROVIDER: ${PAYMENT_PROVIDER:-stripe}
+      BOOK_TIMEOUT_MS: ${BOOK_TIMEOUT_MS:-20000}
+      NOTIFICATION_PROVIDER: ${NOTIFICATION_PROVIDER:-gmail}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Containerfile
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

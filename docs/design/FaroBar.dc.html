@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/styles.css">
+<script src="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/_ds_bundle.js"></script>
+</helmet>
+<div style="height:64px;box-sizing:border-box;display:flex;align-items:center;gap:32px;padding:0 32px;background:var(--surface);border-bottom:1px solid var(--border);font-family:Inter,sans-serif;position:relative">
+  <div style="display:flex;align-items:center;gap:8px">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9.5" stroke="#0E6F8E" stroke-width="1.5"></circle><path d="M11 4.5l2.6 6.5L11 17.5 8.4 11z" fill="#0E6F8E"></path></svg>
+    <span style="font-family:Spectral,serif;font-weight:600;font-size:20px;color:var(--text)">Faro</span>
+  </div>
+  <div style="display:flex;gap:8px">
+    <x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" hint-size="auto,36px" active="{{ planActive }}">Plan a trip</x-import>
+    <x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" hint-size="auto,36px" active="{{ tripsActive }}">My trips</x-import>
+  </div>
+  <div style="margin-left:auto;width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500">MR</div>
+  <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;right:32px;top:56px;width:216px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 16px rgba(22,36,43,.12);padding:4px;z-index:2">
+      <div style="padding:8px 12px;font-size:14px;color:var(--text);border-radius:4px;background:var(--surface-muted)">Profile &amp; preferences</div>
+      <div style="padding:8px 12px;font-size:14px;color:var(--text)">Log out</div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { const a = this.props.active; return { planActive: a !== 'trips', tripsActive: a === 'trips', menu: !!this.props.menu }; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faro screens (current implementation)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Spectral:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Tokens: the Ocean theme. Real values live in web/tailwind.config.ts and web/src/index.css. */
+:root{--bg:#F5F8F9;--surface:#fff;--muted:#EEF3F4;--text:#16242B;--text2:#566269;--text3:#8C969B;--border:#DCE2E4;--accent:#0E6F8E;--accent-hover:#0A5871;--accent-soft:#E3F1F5;--danger:#B3261E;--sun:#FFD86B;--sky:#9BE4FF;--coral:#FFB4A2;--mint:#A7F3C8;--lilac:#E0C8FF;--confirmed:#2F8F5B;--estimated:#B8752E;--unavailable:#76838A}
+*{box-sizing:border-box}
+body{margin:0;background:#E9EDEE;font-family:Inter,sans-serif;font-weight:600;color:var(--text)}
+h1.page{font:600 22px Spectral,serif;margin:32px 44px 4px}
+p.note{margin:0 44px 24px;font:500 13px/1.5 Inter;color:var(--text2);max-width:1100px}
+.frame-wrap{margin:0 44px 56px}
+.frame-label{font:600 13px Inter;color:var(--text2);margin:0 0 8px}
+.frame{width:1280px;background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.serif{font-family:Spectral,serif;font-weight:600;margin:0}
+/* page background photo under a 95% veil, content on a solid panel */
+.bgphoto{position:absolute;inset:0;background:linear-gradient(135deg,#7aa6b3,#c9d6a7 60%,#8fb4c4);opacity:1}
+.veil{position:absolute;inset:0;background:rgba(245,248,249,.95)}
+.layer{position:relative}
+.nav{height:64px;background:rgba(255,255,255,.92);display:flex;align-items:center;gap:16px;padding:0 32px;border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:8px;font:600 22px Spectral,serif}
+.logo i{width:24px;height:24px;border:2px solid var(--accent);border-radius:50%;display:inline-block}
+.pill{padding:8px 14px;border-radius:8px;font-size:14px;color:var(--text2)}
+.pill.on{background:var(--accent-soft);color:var(--accent)}
+.dots{margin-left:auto;display:flex;gap:10px;align-items:center}
+.dots b{width:16px;height:16px;border-radius:50%;display:block}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:12px;display:flex;align-items:center;justify-content:center}
+.main{padding:32px}
+.back{display:inline-block;margin-bottom:16px;font-size:14px}
+.panel{background:var(--surface);border-radius:12px;padding:24px;box-shadow:0 4px 12px rgba(22,36,43,.08)}
+.hero{height:132px;border-radius:12px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.45);margin-bottom:24px}
+.hero.lodging{background:linear-gradient(135deg,#6f8f5a,#c8b98a)}
+.hero.vehicle{background:linear-gradient(135deg,#3d6a52,#7d9d86)}
+.hero.country{background:linear-gradient(135deg,#2f7d6d,#a9c9b4)}
+.hero.plain{background:linear-gradient(135deg,var(--accent),var(--accent-hover))}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(22,36,43,.85),rgba(22,36,43,.4) 60%,rgba(22,36,43,.1))}
+.hero>*{position:relative}
+.hero h2{font:600 30px Spectral,serif;margin:0}
+.hero small{font-size:13px;font-weight:600}
+.hero .ph{position:absolute;right:16px;top:12px;font:500 11px Inter;opacity:.8}
+.head-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.chips{display:flex;gap:8px}
+.chip{padding:6px 14px;border-radius:999px;background:#fff;border:1px solid var(--border);font-size:13px}
+.tabs{display:flex;gap:8px;margin:8px 0 12px}
+.tab{padding:8px 14px;border-radius:8px;font-size:14px;color:var(--text2)}
+.tab.on{background:var(--accent-soft);color:var(--accent)}
+.step{font-size:14px;margin:8px 0 16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px}
+.input{height:40px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:0 12px;display:flex;align-items:center;font-size:14px;min-width:100px}
+.row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 16px;border-radius:8px;font-size:14px;background:var(--accent);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.btn.soft{background:var(--accent-soft);color:var(--accent);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--text);box-shadow:none}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--text2);font-size:11px;letter-spacing:.04em;padding:10px 12px;background:var(--muted)}
+td{padding:14px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;background:#e3f4ea;color:var(--confirmed)}
+.tag.est{background:#f8ecd9;color:var(--estimated)}
+.tag.unv{background:#e7ebec;color:var(--unavailable)}
+.photo{background:linear-gradient(135deg,#b9cfd6,#dfe8e3);border-radius:8px}
+.grid2{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card .stack>*{margin-bottom:14px}
+.bubble{background:rgba(255,255,255,.75);backdrop-filter:blur(4px);border-radius:12px;padding:24px}
+.starters{display:flex;gap:12px;justify-content:center;margin:24px 0}
+.starters span{padding:10px 20px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font-size:14px}
+.send{display:flex;gap:8px;background:rgba(255,255,255,.8);padding:8px;border-radius:8px}
+.send .input{flex:1}
+/* login */
+.login{height:760px;background:linear-gradient(120deg,#5e7a8a,#8aa89a 45%,#2f8f6b);position:relative;display:flex;align-items:center;justify-content:center;gap:96px;padding:48px}
+.login:before{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgba(22,36,43,.75),rgba(22,36,43,.35) 50%,rgba(22,36,43,.1))}
+.login>*{position:relative}
+.welcome{width:520px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.welcome h1{font:600 36px Spectral,serif;color:var(--sun);margin:16px 0}
+.welcome .rule{width:48px;height:4px;border-radius:2px;background:var(--coral);margin-bottom:16px}
+.benefit{display:block;margin:10px 0;padding:10px 16px;border-radius:999px;border:1px solid;font-size:14px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);width:fit-content;max-width:100%}
+.b1{border-color:rgba(155,228,255,.7);background:rgba(155,228,255,.2)}
+.b2{border-color:rgba(167,243,200,.7);background:rgba(167,243,200,.2)}
+.b3{border-color:rgba(255,180,162,.7);background:rgba(255,180,162,.2)}
+.b4{border-color:rgba(224,200,255,.7);background:rgba(224,200,255,.2)}
+.signin{width:420px;background:rgba(255,255,255,.95);border-radius:12px;padding:32px;box-shadow:0 12px 32px rgba(0,0,0,.25);text-shadow:none}
+.signin .btn{width:100%;margin-top:8px}
+/* plan */
+.plan{display:grid;grid-template-columns:1fr 340px;gap:16px}
+.day h4{font:600 17px Spectral,serif;margin:0 0 12px}
+.slot{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border)}
+.bar{height:12px;border-radius:6px;display:flex;overflow:hidden;margin:12px 0}
+.bar i{display:block;height:100%}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:13px}
+.cards3{display:grid;grid-template-columns:repeat(3,300px);gap:16px}
+.status{font-size:13px;color:var(--text2);margin:4px 0}
+.steps{display:flex;gap:8px;margin-bottom:24px}
+.steps span{flex:1;text-align:center;padding:10px;border-radius:8px;background:var(--muted);font-size:12px;color:var(--text2)}
+.steps span.on{background:var(--accent);color:#fff}
+</style>
+</head>
+<body>
+<h1 class="page">Faro screens · current implementation (web, 1280px)</h1>
+<p class="note">Redrawn from the running application on 2026-10-13. It replaces nothing in <code>Faro Screens.dc.html</code> (the original layout source of truth, kept for history): it shows the same seven routes and the search tabs with the visual layer added (photo banners, faint page photo, solid content panel, themes, the login welcome panel). Photos are drawn as gradients; in the app they are Wikipedia lead images matched to the page (the country, lodging pictures on hotel pages, vehicles on transport pages). Money is shown as a currency code with tabular figures; every time-sensitive figure carries a Confirmed, Estimated or Unavailable label.</p>
+
+<!-- 1 LOGIN -->
+<div class="frame-wrap"><p class="frame-label">1 · /login</p>
+<div class="frame login">
+  <div class="dots" style="position:absolute;right:24px;top:20px;margin:0"><b style="background:#0E6F8E;outline:2px solid #16242B"></b><b style="background:#D1242F"></b><b style="background:#1A8F55"></b><b style="background:#7B3FA1"></b></div>
+  <div class="welcome">
+    <div class="logo" style="color:#fff"><i style="background:#fff"></i> Faro</div>
+    <h1>Your next adventure starts here</h1>
+    <div class="rule"></div>
+    <p style="font-size:15px;line-height:1.6">Dream it, plan it, book it. Faro turns a spark of an idea into a trip you cannot wait to take, with real hotels, honest prices, hidden-gem places and a day-by-day plan that fits your budget.</p>
+    <span class="benefit b1">✦ Wake up somewhere wonderful: hotels with live prices and the rooms you want</span>
+    <span class="benefit b2">✦ Find the smartest way there, flights and trains side by side</span>
+    <span class="benefit b3">✦ Discover places worth the trip, with photos, hours and fees</span>
+    <span class="benefit b4">✦ See every day mapped out and every cost counted</span>
+    <p style="font-size:12px;color:var(--sun)">Test mode: bookings here are sandbox bookings, no real money moves.</p>
+  </div>
+  <div class="signin">
+    <h2 class="serif" style="font-size:22px">Welcome back</h2>
+    <p style="font-size:13px;color:var(--text2)">Log in to continue planning.</p>
+    <div class="field"><label>Email</label><div class="input" style="color:var(--text3)">you@example.com</div></div>
+    <div class="field" style="margin-top:12px"><label>Password</label><div class="input"></div></div>
+    <div class="btn" style="margin-top:20px">Log in</div>
+    <p style="text-align:center;font-size:12px;color:var(--text3)">or</p>
+    <div class="btn soft">Continue with Google</div>
+    <p style="text-align:center;font-size:13px;color:var(--text2);margin-top:24px">New here? <span style="color:var(--accent)">Create account</span></p>
+  </div>
+</div></div>
+
+<!-- 2 PLAN A TRIP -->
+<div class="frame-wrap"><p class="frame-label">2 · / (Plan a trip)</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil" style="background:rgba(245,248,249,.6)"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><b style="background:#0E6F8E;outline:2px solid #16242B"></b><b style="background:#D1242F"></b><b style="background:#1A8F55"></b><b style="background:#7B3FA1"></b><span class="avatar">ST</span></div></div>
+  <div class="main">
+    <div class="hero country"><span class="ph">photo: chosen country</span><h2>Welcome to Faro</h2><small>Tell us the trip you are dreaming of, in the form or in a friendly chat, and we will find the stays, the flights and the places that make it unforgettable.</small></div>
+    <div class="grid2">
+      <div class="card"><div class="head-row"><span class="serif" style="font-size:18px">Trip details</span><span class="btn" style="height:32px">+ New trip</span></div>
+        <div class="stack">
+          <div class="field"><label>Destination country *</label><div class="input">Sri Lanka</div></div>
+          <div class="field"><label>Destination city</label><div class="input">Colombo</div></div>
+          <div class="field"><label>Dates * (start and end)</label><div class="row"><div class="input">12/10/2026</div><div class="input">12/17/2026</div></div></div>
+          <div class="field"><label>Duration</label><div class="input">7</div></div>
+          <div class="field"><label>Travelers * (adults and children)</label><div class="row"><div class="input">2</div><div class="input">1</div></div><p style="font-size:11px;color:var(--text2)">Age of each child in years (0 to 17). For a baby under 1 year, enter 0.</p><div class="input" style="width:80px">8</div></div>
+          <div class="field"><label>Budget *</label><div class="row"><div class="input">LKR (Sri Lankan Rupee)</div><div class="input" style="flex:1">Total</div></div></div>
+          <div class="field"><label>Transport preference *</label><div class="input">None stated</div></div>
+          <div class="field"><label>Accommodation preference *</label><div class="input">Hotel</div></div>
+        </div></div>
+      <div class="bubble"><h2 class="serif" style="font-size:32px;text-align:center">Where do you want to go?</h2>
+        <div class="starters"><span>I know my destination</span><span>Recommend somewhere for me</span><span>Just exploring</span></div>
+        <div class="send"><div class="input">Message Faro…</div><div class="btn" style="opacity:.55">Send</div></div></div>
+    </div>
+  </div>
+</div></div></div>
+
+<!-- 3 HOTELS -->
+<div class="frame-wrap"><p class="frame-label">3 · /search · Hotels tab</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero lodging"><span class="ph">photo: hotel, villa, cottage, resort…</span><h2>Colombo, Sri Lanka</h2><small>10–17 Dec 2026 · 2 adults, 1 child</small></div>
+    <div class="head-row"><h3 class="serif" style="font-size:20px">Search results</h3><div class="chips"><span class="chip">Colombo, Sri Lanka</span><span class="chip">10–17 Dec 2026</span><span class="chip">2 adults, 1 child</span></div></div>
+    <div class="tabs"><span class="tab on">Hotels</span><span class="tab">Transport</span><span class="tab">Places to visit</span></div>
+    <div class="step">Step 1 of 3: find a cosy place to rest your head. Every great trip starts with a great bed.</div>
+    <div class="row" style="margin-bottom:16px"><div class="field"><label>Check-in</label><div class="input" style="width:150px">12/10/2026</div></div><div class="field"><label>Check-out</label><div class="input" style="width:150px">12/17/2026</div></div><div class="field"><label>Guests</label><div class="input" style="width:80px">3</div></div><div class="field"><label>Rooms</label><div class="input" style="width:80px">1</div></div><div class="field"><label>Rating</label><div class="input" style="width:100px">All</div></div></div>
+    <table><tr><th>HOTEL</th><th>CATEGORY</th><th>ROOM TYPES</th><th>LOCATION</th><th>PRICE PER NIGHT</th><th>RATING</th><th></th></tr>
+    <tr><td>Shangri-La Colombo<br><span style="font-size:11px;color:var(--text2)">Within your budget share</span></td><td>★★★★★</td><td style="width:280px;font-size:12px">Deluxe Lake View King, Executive Suite +14 more<br><span style="color:var(--text2)">Up to 6 people per room</span></td><td>1 Galle Face (0.9 km from centre)</td><td><span class="tag">✓ Confirmed</span> USD 176.44 / night<br><span style="font-size:11px;color:var(--text2)">Sandbox rate</span></td><td>9.4</td><td><span class="btn soft" style="height:32px">View details</span></td></tr>
+    <tr><td>Cinnamon Life at City of Dreams</td><td>★★★★★</td><td style="font-size:12px">Skyline Suite, Suite, Oceanscape Suite +9 more<br><span style="color:var(--text2)">Up to 4 people per room</span></td><td>No. 01, Justice Akbar Mawatha (1.3 km)</td><td><span class="tag">✓ Confirmed</span> USD 173.64 / night<br><span style="font-size:11px;color:var(--text2)">Sandbox rate</span></td><td>9.2</td><td><span class="btn soft" style="height:32px">View details</span></td></tr></table>
+    <div class="head-row" style="margin-top:16px"><span class="btn soft">Previous</span><span class="btn">Next: Transport</span></div>
+  </div></div>
+</div></div></div>
+
+<!-- 4 TRANSPORT -->
+<div class="frame-wrap"><p class="frame-label">4 · /search · Transport tab</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero vehicle"><span class="ph">photo: airliner, train, bus, ferry…</span><h2>Colombo, Sri Lanka</h2><small>10–17 Dec 2026 · 2 adults, 1 child</small></div>
+    <div class="tabs"><span class="tab">Hotels</span><span class="tab on">Transport</span><span class="tab">Places to visit</span></div>
+    <div class="step">Step 2 of 3: let us get you there in style. Compare your ways to go and pick your favourite.</div>
+    <div class="row" style="margin-bottom:12px"><div class="field"><label>Start country *</label><div class="input" style="width:250px">United Kingdom</div></div><div class="field"><label>Start city</label><div class="input" style="width:250px">London</div></div><div class="field"><label>Date</label><div class="input" style="width:150px">12/10/2026</div></div></div>
+    <div class="chips" style="margin-bottom:12px"><span class="chip" style="background:var(--accent-soft)">Flights</span><span class="chip" style="background:var(--accent-soft)">Trains</span><span class="chip" style="background:var(--accent-soft)">Buses</span><span class="chip">Rental cars</span><span class="chip">Taxis</span><span class="chip">Walking</span></div>
+    <p style="font-size:12px;color:var(--text2)">Flight offers are from the Duffel test environment: sandbox data, not real fares or schedules.</p>
+    <table><tr><th>MODE</th><th>PROVIDER</th><th>DEPARTURE</th><th>ARRIVAL</th><th>DURATION</th><th>TRANSFERS</th><th style="text-align:right">PRICE</th></tr>
+    <tr><td>Flight<br><span style="font-size:11px;color:var(--accent)">Select</span></td><td>Iberia</td><td>01:28</td><td>00:37</td><td>12h 9m</td><td>0</td><td style="text-align:right"><span class="tag">✓ Confirmed</span> USD 876.66<br><span style="font-size:11px;color:var(--text2)">Sandbox rate</span><br><span class="btn" style="height:32px;margin-top:6px">Book this flight</span></td></tr>
+    <tr><td>Train<br><span style="font-size:11px;color:var(--accent)">Select</span></td><td>—</td><td><span class="tag unv">Unavailable</span></td><td><span class="tag unv">Unavailable</span></td><td>—</td><td>—</td><td style="text-align:right"><span class="tag est">Estimated</span> USD 120.00<br><span style="font-size:11px;color:var(--text2)">Faro estimate, not a quote</span></td></tr></table>
+    <div class="head-row" style="margin-top:16px"><span class="btn soft">← Hotels</span><span class="btn">Next: Places</span></div>
+  </div></div>
+</div></div></div>
+
+<!-- 5 PLACES -->
+<div class="frame-wrap"><p class="frame-label">5 · /search · Places to visit tab</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero country"><span class="ph">photo: chosen country</span><h2>Colombo, Sri Lanka</h2><small>10–17 Dec 2026 · 2 adults, 1 child</small></div>
+    <div class="tabs"><span class="tab">Hotels</span><span class="tab">Transport</span><span class="tab on">Places to visit</span></div>
+    <div class="step">Step 3 of 3: choose the places that make your heart race. Your plan is built around them.</div>
+    <p style="font-size:13px">Top 10 places to visit in Colombo, Sri Lanka (best of 80 found), for your stay. Choose at least one place to open your trip plan.</p>
+    <div class="row" style="margin-bottom:12px"><span class="btn soft">Tick all shown</span><span class="btn soft" style="opacity:.6">Clear ticks</span><span class="btn">Add 10 ticked places to trip</span></div>
+    <div class="card" style="display:flex;gap:16px;margin-bottom:12px"><div style="flex:1"><div>☐ Galle Face Green <span class="tag" style="margin-left:8px">Park</span></div><p style="font-size:12px;color:var(--text2)">1.3 km from the centre · Entry not stated · Opening hours: 24/7</p><span class="btn soft" style="height:32px">Add to trip</span> <span style="font-size:12px;color:var(--accent)">On the map · Wikidata</span></div><div class="photo" style="width:180px;height:100px"></div></div>
+    <div class="card" style="display:flex;gap:16px"><div style="flex:1"><div>☑ Jami Ul-Alfar Mosque <span class="tag" style="margin-left:8px">Attraction</span></div><p style="font-size:12px;color:var(--text2)">0.5 km from the centre · Entry not stated · Opening hours: Mo-Th, Sa, Su 10:30-12:00, 13:00-15:00</p><span class="tag" style="background:var(--accent-soft);color:var(--accent)">Chosen for your trip</span></div><div class="photo" style="width:180px;height:100px"></div></div>
+    <div class="head-row" style="margin-top:16px"><span class="btn soft">← Transport</span><span class="btn">Open trip plan</span></div>
+  </div></div>
+</div></div></div>
+
+<!-- 6 HOTEL DETAILS -->
+<div class="frame-wrap"><p class="frame-label">6 · /hotels/:id</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero lodging"><span class="ph">photo: hotel, villa, cottage…</span><h2>Cinnamon Life at City of Dreams</h2><small>Colombo, No. 01, Justice Akbar Mawatha</small></div>
+    <div class="photo" style="height:190px;margin-bottom:8px"></div>
+    <div class="row" style="margin-bottom:16px"><div class="photo" style="width:180px;height:56px"></div><div class="photo" style="width:180px;height:56px"></div><div class="photo" style="width:180px;height:56px"></div></div>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:24px">
+      <div><h3 class="serif" style="font-size:20px">Cinnamon Life at City of Dreams <span style="font:500 12px Inter;color:var(--text2)">5-star hotel · 9.2 / 10</span></h3>
+        <p style="font-size:13px;font-weight:500;line-height:1.6;background:var(--muted);border-left:3px solid var(--border);padding:12px">Provider description, set apart as provider-sourced text.</p>
+        <h4>Amenities</h4><p style="font-size:13px;font-weight:500">Pool · Wi-Fi · Spa · Restaurant</p><h4>Map</h4><div class="photo" style="height:120px"></div><h4>Reviews</h4><p style="font-size:13px;font-weight:500;color:var(--text2)">Reviews are set apart as provider-sourced text.</p></div>
+      <div class="card"><h4 style="margin:0 0 12px">Rooms</h4><div class="field"><label>Rooms</label><div class="input" style="width:80px">2</div></div><div class="field" style="margin-top:12px"><label>Room 1 type</label><div class="input">Deluxe King Gallery</div></div><div class="field" style="margin-top:12px"><label>Room 2 type</label><div class="input">Deluxe King City</div></div><p style="font-size:13px"><span class="tag">✓ Confirmed</span> USD 349.28 / night · sandbox rate</p><div class="btn">Continue to booking</div></div>
+    </div>
+  </div></div>
+</div></div></div>
+
+<!-- 7 TRIP PLAN -->
+<div class="frame-wrap"><p class="frame-label">7 · /trip/:id (planner)</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero country"><span class="ph">photo: chosen country</span><h2>Colombo, Sri Lanka</h2><small>10–17 Dec 2026. Your adventure, day by day. Pack light, dream big.</small></div>
+    <div class="head-row"><h3 class="serif" style="font-size:20px">Colombo, Sri Lanka · 10–17 Dec 2026</h3><span class="btn soft">Download</span></div>
+    <div class="plan">
+      <div class="card day"><h4>Day 1 · 10 Dec 2026</h4>
+        <p style="font-size:11px;color:var(--text2)">Arrival day: activities start after midday.</p>
+        <div class="slot"><span>12:30 Lunch</span><span>1h 30m</span></div>
+        <div class="slot"><span>14:10 Galle Face Green <span style="color:var(--text3)">Remove</span><br><span style="font-size:11px;color:var(--text2)">Open 24/7</span></span><span>1h · <span class="tag unv">Unavailable</span></span></div>
+        <div class="slot"><span>15:20 Jami Ul-Alfar Mosque <span style="color:var(--text3)">Remove</span><br><span style="font-size:11px;color:var(--text2)">Open Mo-Th, Sa, Su 10:30-12:00</span></span><span>1h 30m</span></div>
+        <div class="slot"><span>18:00 Rest at the hotel</span><span>1h</span></div>
+        <div class="slot"><span>19:13 All Saints' Church<br><span style="font-size:11px;color:var(--text2)">Opening hours not stated: check before you go</span></span><span>1h</span></div></div>
+      <div class="card"><h4 style="margin:0">Budget</h4>
+        <div class="bar"><i style="width:70%;background:#C2185B"></i><i style="width:20%;background:#7B3FA1"></i><i style="width:10%;background:#76838A"></i></div>
+        <div class="legend"><span>Hotels —</span><span>Transport —</span><span>Activities USD 0.00 (partial)</span><span>Food USD 920.00</span><span>Local transport USD 192.00</span><span>Misc USD 55.60</span></div>
+        <p style="margin:16px 0 4px;font-size:12px;color:var(--text2)">Estimated total</p><p style="margin:0;font-size:22px" class="num">USD 1,167.60</p>
+        <p style="margin:12px 0 4px;font-size:12px;color:var(--text2)">Budget</p><p style="margin:0;font-size:18px" class="num">USD 4,000.00</p></div>
+    </div>
+  </div></div>
+</div></div></div>
+
+<!-- 8 BOOKING -->
+<div class="frame-wrap"><p class="frame-label">8 · /trip/:id/book/:hotelId (booking)</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill on">Plan a trip</span><span class="pill">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero lodging"><span class="ph">photo: hotel, villa, cottage…</span><h2>Book your stay</h2><small>Cinnamon Life at City of Dreams, almost yours</small></div>
+    <div class="steps"><span>Select room</span><span>Verify availability</span><span class="on">Price and terms</span><span>Guest details</span><span>Confirm</span><span>Pay</span><span>Confirmation</span></div>
+    <div class="card" style="max-width:560px"><h4 style="margin:0 0 12px">Final price and cancellation terms</h4><p style="font-size:13px;font-weight:500">2 rooms · 7 nights · <span class="tag">✓ Confirmed</span> <b class="num">USD 2,444.96</b> (sandbox)</p><p style="font-size:13px;font-weight:500;color:var(--text2)">Cancellation terms from the provider.</p><div class="btn">Continue</div></div>
+  </div></div>
+</div></div></div>
+
+<!-- 9 MY TRIPS -->
+<div class="frame-wrap"><p class="frame-label">9 · /trips (My trips)</p>
+<div class="frame"><div class="bgphoto"></div><div class="veil"></div>
+<div class="layer">
+  <div class="nav"><div class="logo"><i></i> Faro</div><span class="pill">Plan a trip</span><span class="pill on">My trips</span><div class="dots"><span class="avatar">ST</span></div></div>
+  <div class="main"><span class="back">← Back</span>
+  <div class="panel">
+    <div class="hero country"><span class="ph">photo: chosen country</span><h2>Your adventures</h2><small>Every journey you have dreamed up, safe in one place and ready when you are.</small></div>
+    <h3 class="serif" style="font-size:20px;margin-bottom:4px">My trips</h3><p style="font-size:13px;margin:0 0 16px">Pick up where you left off, or start something new.</p>
+    <div class="cards3"><div class="card"><h4 class="serif" style="margin:0 0 4px;font-size:18px">Colombo, Sri Lanka</h4><p class="status">10–17 Dec 2026</p><p class="status">○ Hotels: not booked</p><p class="status">○ Transport: not selected</p><p class="status">○ Places to visit: none chosen</p>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;margin:12px 0;font-size:12px"><div style="display:flex;justify-content:space-between"><span>Budget</span><span class="num">USD 4,000.00</span></div><p style="margin:8px 0 2px;color:var(--text2)">Estimated total</p><p style="margin:0;font-size:20px" class="num">USD 1,167.60</p></div>
+      <div class="row"><span class="btn" style="height:32px">Open</span><span class="btn soft" style="height:32px">Download</span><span class="btn ghost" style="height:32px">Delete</span></div></div></div>
+  </div></div>
+</div></div></div>
+
+<p class="note" style="margin-bottom:48px">Mobile (390px) layouts are unchanged from <code>Mobile Screens.dc.html</code> except for the same visual layer: the photo banner above each screen, the faint page photo, the solid content panel and the colour themes.</p>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/styles.css">
+<script src="_ds/faro-design-system-c83241a4-d71e-4023-95a8-f76da8b47959/_ds_bundle.js"></script>
+<style>body{margin:0;background:#E9EDEE;font-family:Inter,sans-serif}.dv-turn{padding:40px 44px 32px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#16242B;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 15px/1.2 Inter,sans-serif;color:#16242B}.dv-sub{font:13px/1.5 Inter,sans-serif;color:#566269;margin:0 0 24px}.dv-opts{display:flex;flex-wrap:wrap;gap:48px 40px;align-items:flex-start;width:3920px}.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:13px/1.3 Inter,sans-serif;color:#566269}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#16242B;border-radius:5px;text-decoration:none}.dv-card{width:1280px;background:#F7F9F9;border:1px solid #DCE2E4;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;font-family:Inter,sans-serif;color:#16242B}.ph{background:#EEF1F2;border:1px dashed #C2CBCE;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#8C969B;font-size:13px}button{white-space:nowrap;flex-shrink:0}.num{font-variant-numeric:tabular-nums}.h{font-family:Spectral,serif;font-weight:600;margin:0}.lbl{font-size:12px;font-weight:500;color:#566269}.val{font-size:14px;color:#16242B;margin-top:2px}.mut{font-size:14px;color:#8C969B;margin-top:2px}a{color:#0E6F8E}a:hover{color:#0A5871}</style>
+</helmet>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Faro screens · all seven routes, web (1280px) and mobile (390px)</span></div>
+<p class="dv-sub">Reading order, top to bottom: log in, home (with the trip details form and currency selector), search results, trip planner, hotel details, booking steps, my trips. Mobile versions follow below the web frames. Photos and the map are placeholders. The planner is shown over budget so the banner appears.</p>
+<div class="dv-opts">
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>/login · log in</div>
+<div class="dv-card" style="height:760px;display:flex;align-items:center;justify-content:center">
+<div style="width:400px;box-sizing:border-box;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 1px 3px rgba(22,36,43,.08);padding:32px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px"><svg width="32" height="32" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9.5" stroke="#0E6F8E" stroke-width="1.5"></circle><path d="M11 4.5l2.6 6.5L11 17.5 8.4 11z" fill="#0E6F8E"></path></svg><span class="h" style="font-size:32px">Faro</span></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Email" placeholder="you@example.com"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Password" type="password" value="password123"></x-import>
+<div style="display:flex;flex-direction:column"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="100%,40px">Log in</x-import></div>
+<div style="display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:14px"><div style="flex:1;height:1px;background:var(--border)"></div>or<div style="flex:1;height:1px;background:var(--border)"></div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="100%,40px">Continue with Google</x-import>
+<div style="min-height:20px;font-size:14px;color:var(--danger);text-align:center">Incorrect email or password</div>
+<div style="text-align:center;font-size:14px;color:var(--text-secondary)">New here? <a href="#1b" style="font-weight:500">Create account</a></div>
+</div></div></div>
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>/login · sign-up mode</div>
+<div class="dv-card" style="height:760px;display:flex;align-items:center;justify-content:center">
+<div style="width:400px;box-sizing:border-box;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 1px 3px rgba(22,36,43,.08);padding:32px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px"><svg width="32" height="32" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9.5" stroke="#0E6F8E" stroke-width="1.5"></circle><path d="M11 4.5l2.6 6.5L11 17.5 8.4 11z" fill="#0E6F8E"></path></svg><span class="h" style="font-size:32px">Faro</span></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Name" placeholder="Your name"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Email" placeholder="you@example.com"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Password" type="password"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" hint-size="100%,64px" label="Confirm password" type="password"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="100%,40px">Create account</x-import>
+<div style="display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:14px"><div style="flex:1;height:1px;background:var(--border)"></div>or<div style="flex:1;height:1px;background:var(--border)"></div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="100%,40px">Continue with Google</x-import>
+<div style="min-height:20px"></div>
+<div style="text-align:center;font-size:14px"><a href="#1a" style="font-weight:500">Already have an account? Log in</a></div>
+</div></div></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>/ · home, before first message (avatar menu open; trip form left, chat right)</div><dc-import name="HomeForm" filled="{{ false }}" menu="{{ true }}" hint-size="1280px,860px"></dc-import></div>
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>/ · home, in conversation, trip form filled (destination, dates, duration, travelers, budget, preferences)</div><dc-import name="HomeForm" filled="{{ true }}" hint-size="1280px,860px"></dc-import></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>/search · hotels tab</div>
+<div class="dv-card">
+<dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px">
+<dc-import name="SearchHeader" hint-size="100%,40px"></dc-import>
+<div style="display:flex;flex-direction:column;gap:16px"><h2 class="h" style="font-size:20px">Recommended destinations</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+<sc-for list="{{ dests }}" as="d" hint-placeholder-count="3"><x-import component-from-global-scope="FaroDesignSystem_c83241.DestinationCard" rank="{{ d.rank }}" name="{{ d.name }}" reasons="{{ d.reasons }}" score="{{ d.score }}" hint-size="100%,200px"></x-import></sc-for></div></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" active="{{ true }}" hint-size="auto,36px">Hotels</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" hint-size="auto,36px">Transport</x-import></div>
+<div style="display:flex;gap:16px;align-items:flex-end">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Check-in" value="18 Nov 2026" hint-size="180px,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Check-out" value="26 Nov 2026" hint-size="180px,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Guests" value="2 adults, 2 children" hint-size="200px,64px"></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Select" label="Rating" value="All" options="{{ ratingOpts }}" hint-size="140px,64px"></x-import></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.ComparisonTable" columns="{{ hotelCols }}" rows="{{ hotelRows }}" sort-key="price" hint-size="100%,300px"></x-import>
+</div></div></div></div>
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>/search · transport tab (destination set, recommendations hidden)</div>
+<div class="dv-card" style="height:auto">
+<dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px">
+<dc-import name="SearchHeader" hint-size="100%,40px"></dc-import>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" hint-size="auto,36px">Hotels</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.NavItem" active="{{ true }}" hint-size="auto,36px">Transport</x-import></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ modes }}" as="m" hint-placeholder-count="9"><span style="white-space:nowrap;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid {{ m.b }};background:{{ m.bg }};color:{{ m.fg }}">{{ m.n }}</span></sc-for></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.ComparisonTable" columns="{{ transCols }}" rows="{{ transRows }}" sort-key="price" hint-size="100%,300px"></x-import>
+</div></div></div></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>/trip/:tripId · trip planner, over budget</div>
+<div class="dv-card">
+<dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:center;justify-content:space-between"><h1 class="h" style="font-size:24px">Japan Family Trip · 18–26 Nov 2026</h1>
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Download</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="ghost" hint-size="auto,40px">Edit in chat</x-import></div></div>
+<div style="border:1px solid var(--over-budget);background:rgba(194,65,12,.08);border-radius:8px;padding:16px 24px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:14px;font-weight:600;color:var(--over-budget)">This plan is USD 650.00 over your USD 4,000.00 budget.</div>
+<sc-for list="{{ savings }}" as="s" hint-placeholder-count="2"><div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)"><span style="width:16px;height:16px;border:1.5px solid var(--border-strong);border-radius:4px;background:#fff;display:inline-block"></span><span style="flex:1">{{ s.t }}</span><span class="num" style="color:var(--under-budget);font-weight:500">Save USD {{ s.v }}</span></div></sc-for>
+<div style="display:flex;justify-content:flex-end"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Apply selected</x-import></div></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ days }}" as="d" hint-placeholder-count="3"><x-import component-from-global-scope="FaroDesignSystem_c83241.DayItineraryCard" day="{{ d.day }}" date="{{ d.date }}" morning="{{ d.morning }}" afternoon="{{ d.afternoon }}" evening="{{ d.evening }}" hint-size="100%,300px"></x-import></sc-for>
+<div class="ph" style="height:48px;border-style:solid;background:transparent">Days 4–8 continue in the same format</div></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Budget" hint-size="100%,380px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.BudgetBreakdown" categories="{{ cats }}" total="USD 4,650.00" budget="USD 4,000.00" remaining="USD -650.00" hint-size="100%,320px"></x-import></x-import>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" hint-size="100%,260px">
+<div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+<div class="lbl">Selected hotels</div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--confirmed)"></span>Park Hyatt Tokyo</div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;border:1.5px solid var(--text-muted);box-sizing:border-box"></span>Kyoto Granbell Hotel</div>
+<div class="lbl" style="margin-top:8px">Selected transport</div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--confirmed)"></span>Tokyo → Kyoto, Nozomi 15</div>
+<div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;border:1.5px solid var(--text-muted);box-sizing:border-box"></span>Kyoto → Tokyo, Nozomi 28</div></div></x-import>
+</div></div></div></div></div>
+<div class="dv-opt" id="1h"><div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>/hotels/:hotelId · hotel details, room selected</div>
+<div class="dv-card">
+<dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px"><div class="ph" style="height:340px">Hero photo</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"><div class="ph" style="height:80px">Photo</div><div class="ph" style="height:80px">Photo</div><div class="ph" style="height:80px">Photo</div><div class="ph" style="height:80px">Photo</div></div></div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:baseline;gap:16px"><h1 class="h" style="font-size:18px">Park Hyatt Tokyo</h1><span style="font-size:14px;color:var(--text-secondary)">5-star hotel</span><span class="num" style="font-size:14px;font-weight:500">4.8 <span style="color:var(--text-secondary);font-weight:400">(2,104 reviews)</span></span></div>
+<div style="font-size:14px;line-height:1.6;color:var(--text-secondary);padding-left:16px;border-left:2px solid var(--border-strong);font-style:italic">“Soaring views over Shinjuku’s neon skyline from the upper floors of the Shinjuku Park Tower, with a spa, pool and three restaurants on site.”<div style="font-style:normal;font-size:12px;color:var(--text-muted);margin-top:4px">Provider description</div></div>
+<div><div class="lbl" style="margin-bottom:8px">Amenities</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ amenities }}" as="a" hint-placeholder-count="8"><span style="font-size:13px;padding:4px 12px;border-radius:999px;background:var(--surface-muted);color:var(--text)">{{ a }}</span></sc-for></div></div>
+<div><div class="lbl" style="margin-bottom:8px">Map</div><div class="ph" style="height:200px;position:relative">Map · hotel pin, Shinjuku<span style="position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid #fff;box-shadow:0 1px 4px rgba(22,36,43,.3)"></span></div></div>
+<div style="display:flex;flex-direction:column;gap:12px"><div class="lbl">Reviews</div>
+<div style="font-size:14px;line-height:1.6;color:var(--text-secondary);padding-left:16px;border-left:2px solid var(--border-strong);font-style:italic">“Impeccable service throughout our stay. The family room was quiet and the breakfast was excellent.”<div style="font-style:normal;font-size:12px;color:var(--text-muted);margin-top:4px">Guest review · 2 Oct 2026</div></div>
+<div style="font-size:14px;line-height:1.6;color:var(--text-secondary);padding-left:16px;border-left:2px solid var(--border-strong);font-style:italic">“Short walk to Shinjuku station, and the staff arranged our airport transfer without fuss.”<div style="font-style:normal;font-size:12px;color:var(--text-muted);margin-top:4px">Guest review · 14 Sep 2026</div></div></div>
+</div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Rooms" hint-size="360px,520px">
+<div style="display:flex;flex-direction:column;gap:16px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:500">Deluxe King</span><span style="display:flex;gap:8px;align-items:center"><x-import component-from-global-scope="FaroDesignSystem_c83241.StatusBadge" status="confirmed" hint-size="auto,22px"></x-import><span class="num">USD 280.00 / night</span></span></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="100%,40px">Select room</x-import></div>
+<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:500">Twin Room</span><span style="display:flex;gap:8px;align-items:center"><x-import component-from-global-scope="FaroDesignSystem_c83241.StatusBadge" status="estimated" hint-size="auto,22px"></x-import><span class="num">USD 240.00 / night</span></span></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="100%,40px">Selected</x-import></div>
+<div style="border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">3 nights × USD 240.00</span><span class="num">USD 720.00</span></div>
+<div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">Taxes &amp; fees</span><span class="num">USD 45.00</span></div>
+<div style="display:flex;justify-content:space-between;font-weight:600"><span>Total</span><span class="num">USD 765.00</span></div>
+<div style="font-size:13px;color:var(--text-secondary)">Free cancellation until 15 Nov 2026</div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="100%,40px">Continue to booking</x-import></div>
+</x-import>
+</div></div></div></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1i"><div class="dv-olabel"><a class="dv-oid" href="#1i">1i</a>/book · verify availability</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 1 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px;display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Verify availability" hint-size="100%,160px"><div style="font-size:14px;color:var(--text-secondary)">Checking Twin Room at Park Hyatt Tokyo for 18–21 Nov 2026 with the provider…</div><div style="height:4px;background:var(--surface-muted);border-radius:2px;margin-top:16px"><div style="width:40%;height:4px;background:var(--accent);border-radius:2px"></div></div></x-import>
+<div style="border:1px solid var(--over-budget);background:rgba(194,65,12,.08);border-radius:8px;padding:16px 24px;font-size:14px;display:flex;flex-direction:column;gap:12px"><div style="color:var(--over-budget);font-weight:600">Could not confirm availability for Twin Room.</div><div style="color:var(--text)">Shown if the provider reports the room as taken.</div><div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Back to hotel details</x-import></div></div>
+</div></div></div></div>
+<div class="dv-opt" id="1j"><div class="dv-olabel"><a class="dv-oid" href="#1j">1j</a>/book · price &amp; terms</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 2 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Price &amp; terms" hint-size="100%,340px"><div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+<div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">3 nights × USD 240.00</span><span class="num">USD 720.00</span></div>
+<div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">Taxes &amp; fees</span><span class="num">USD 45.00</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-weight:600;border-top:1px solid var(--border);padding-top:12px"><span>Total</span><span style="display:flex;gap:8px;align-items:center"><x-import component-from-global-scope="FaroDesignSystem_c83241.StatusBadge" status="confirmed" hint-size="auto,22px"></x-import><span class="num">USD 765.00</span></span></div>
+<div class="lbl" style="margin-top:8px">Cancellation policy</div><div style="color:var(--text-secondary);line-height:1.6">Free cancellation until 15 Nov 2026. After that date the first night, USD 240.00, is charged. No-shows are charged the full stay.</div>
+<div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Accept and continue</x-import></div></div></x-import></div></div></div></div>
+<div class="dv-opt" id="1k"><div class="dv-olabel"><a class="dv-oid" href="#1k">1k</a>/book · guest details</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 3 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Guest details" hint-size="100%,380px"><div style="display:flex;flex-direction:column;gap:16px">
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Primary guest name" value="Maya Rivera" hint-size="100%,64px"></x-import>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Email" value="maya@example.com" hint-size="100%,64px"></x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Phone" value="+1 415 555 0142" hint-size="100%,64px"></x-import></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Input" label="Special requests (optional)" placeholder="Cots, quiet floor, late arrival" hint-size="100%,64px"></x-import>
+<div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Continue</x-import></div></div></x-import></div></div></div></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1l"><div class="dv-olabel"><a class="dv-oid" href="#1l">1l</a>/book · confirm</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 4 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Review your booking" hint-size="100%,360px"><div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+<sc-for list="{{ review }}" as="r" hint-placeholder-count="5"><div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">{{ r.l }}</span><span class="num" style="font-weight:{{ r.w }}">{{ r.v }}</span></div></sc-for>
+<div><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Confirm and pay</x-import></div></div></x-import></div></div></div></div>
+<div class="dv-opt" id="1m"><div class="dv-olabel"><a class="dv-oid" href="#1m">1m</a>/book · pay (payment-declined alert shown)</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 5 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px;display:flex;flex-direction:column;gap:16px">
+<div style="border:1px solid var(--danger);background:rgba(179,38,30,.08);border-radius:8px;padding:16px 24px;font-size:14px;display:flex;flex-direction:column;gap:12px"><div style="color:var(--danger);font-weight:600">Payment was declined by the card issuer.</div><div style="color:var(--text)">No booking was made. Try payment again or use a different card.</div></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Payment" hint-size="100%,220px"><div class="ph" style="height:140px;text-align:center;padding:0 24px">Payment provider’s embedded payment fields</div></x-import></div></div></div></div>
+<div class="dv-opt" id="1n"><div class="dv-olabel"><a class="dv-oid" href="#1n">1n</a>/book · confirmation</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="plan" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:32px"><x-import component-from-global-scope="FaroDesignSystem_c83241.BookingStepper" current-step="{{ 6 }}" hint-size="100%,60px"></x-import>
+<div style="max-width:640px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="Booking confirmed" hint-size="100%,380px"><div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+<div style="display:flex;align-items:center;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.StatusBadge" status="confirmed" hint-size="auto,22px"></x-import></div>
+<sc-for list="{{ done }}" as="r" hint-placeholder-count="4"><div style="display:flex;justify-content:space-between"><span style="color:var(--text-secondary)">{{ r.l }}</span><span class="num" style="font-weight:{{ r.w }}">{{ r.v }}</span></div></sc-for>
+<div style="color:var(--text-secondary)">A confirmation email was sent to maya@example.com.</div>
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">View in My trips</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Resend email</x-import></div></div></x-import></div></div></div></div>
+<div style="flex-basis:100%;height:0"></div>
+<div class="dv-opt" id="1o"><div class="dv-olabel"><a class="dv-oid" href="#1o">1o</a>/trips · my trips</div>
+<div class="dv-card" style="height:620px"><dc-import name="FaroBar" active="trips" hint-size="100%,64px"></dc-import>
+<div style="padding:32px;display:flex;flex-direction:column;gap:24px"><h1 class="h" style="font-size:24px">My trips</h1>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+<sc-for list="{{ trips }}" as="t" hint-placeholder-count="3"><x-import component-from-global-scope="FaroDesignSystem_c83241.Card" title="{{ t.title }}" hint-size="100%,260px">
+<div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+<div style="color:var(--text-secondary)">{{ t.dates }}</div>
+<div style="display:flex;gap:16px"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;box-sizing:border-box;background:{{ t.hf }};border:1.5px solid {{ t.hb }}"></span>Hotels</span><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;box-sizing:border-box;background:{{ t.tf }};border:1.5px solid {{ t.tb }}"></span>Transport</span></div>
+<x-import component-from-global-scope="FaroDesignSystem_c83241.KPICard" label="Estimated" value="{{ t.total }}" hint-size="100%,64px"></x-import>
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" hint-size="auto,40px">Open</x-import><x-import component-from-global-scope="FaroDesignSystem_c83241.Button" variant="secondary" hint-size="auto,40px">Download</x-import></div></div>
+</x-import></sc-for></div></div></div></div>
+
+<div style="flex-basis:100%;height:0"></div>
+<div style="flex-basis:100%;font:600 15px Inter,sans-serif;color:#16242B;margin-top:24px">Mobile · 390px · same screens, single column, 44px touch targets, 16px page padding</div>
+<dc-import name="Mobile Screens" hint-size="3120px,1800px"></dc-import>
+</div>
+<p style="font:13px/1.5 Inter,sans-serif;color:#566269;margin:24px 0 0">Next: "add a mobile layout for the planner" · "show the empty My trips state" · "show the booking price-change alert at step 3"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const DS = window.FaroDesignSystem_c83241 || {}, E = React.createElement;
+    const num = { fontVariantNumeric: 'tabular-nums' };
+    const price = (s, t) => E('div', { style: { display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'flex-end' } }, E(DS.StatusBadge, { status: s }), E('span', { style: num }, t));
+    const thumb = n => E('div', { style: { display: 'flex', gap: 12, alignItems: 'center' } }, E('div', { style: { width: 48, height: 36, borderRadius: 4, background: '#EEF1F2', border: '1px dashed #C2CBCE' } }), E('span', { style: { fontWeight: 500 } }, n));
+    const btn = () => E(DS.Button, { variant: 'secondary' }, 'View details');
+    const hotelCols = [{ key: 'hotel', label: 'Hotel' }, { key: 'cat', label: 'Category' }, { key: 'loc', label: 'Location', sortable: true }, { key: 'price', label: 'Price per night', align: 'right', sortable: true }, { key: 'rating', label: 'Rating', sortable: true, tabular: true }, { key: 'act', label: 'Actions', align: 'right' }];
+    const H = [['Park Hyatt Tokyo', '5-star', 'Shinjuku', 'confirmed', 'USD 280.00', '4.8'], ['Hotel Gracery Shinjuku', '4-star', 'Kabukicho', 'estimated', 'USD 190.00', '4.4'], ['Keio Plaza Hotel Tokyo', '4-star', 'Nishi-Shinjuku', 'confirmed', 'USD 165.00', '4.3'], ['Shinjuku Granbell Hotel', '3-star', 'Kabukicho', 'estimated', 'USD 120.00', '4.1'], ['Hotel Sunroute Plaza', '3-star', 'Yoyogi', 'unavailable', 'USD 98.00', '4.0']];
+    const hotelRows = H.map(h => ({ hotel: thumb(h[0]), cat: h[1], loc: h[2], price: price(h[3], h[4]), rating: h[5], act: btn() }));
+    const transCols = [{ key: 'mode', label: 'Mode' }, { key: 'prov', label: 'Provider' }, { key: 'dep', label: 'Departure', tabular: true }, { key: 'arr', label: 'Arrival', tabular: true }, { key: 'dur', label: 'Duration', sortable: true, tabular: true }, { key: 'tr', label: 'Transfers', tabular: true }, { key: 'price', label: 'Price', align: 'right', sortable: true }];
+    const T = [['Train', 'JR Central, Nozomi', '19 Nov 2026 09:03', '19 Nov 2026 11:18', '2h 15m', '0', 'confirmed', 'USD 112.00'], ['Flight', 'ANA, NH 21', '19 Nov 2026 10:00', '19 Nov 2026 11:15', '1h 15m', '0', 'estimated', 'USD 142.00'], ['Bus', 'Willer Express', '19 Nov 2026 08:30', '19 Nov 2026 14:10', '5h 40m', '0', 'estimated', 'USD 48.00'], ['Private transfer', 'Kyoto Cars', '19 Nov 2026 09:00', '19 Nov 2026 14:00', '5h 00m', '0', 'unavailable', '—']];
+    const transRows = T.map(t => ({ mode: t[0], prov: t[1], dep: t[2], arr: t[3], dur: t[4], tr: t[5], price: price(t[6], t[7]) }));
+    const sel = ['Flights', 'Trains', 'Buses', 'Rental cars', 'Private transfers', 'Taxis', 'Metro/subway', 'Public transportation', 'Walking'];
+    const on = ['Trains', 'Flights', 'Buses', 'Private transfers'];
+    const it = (title, duration, cost, hours, travelTime) => ({ title, duration, cost, hours, travelTime });
+    const fl = ['Destination', 'Dates', 'Duration', 'Travelers', 'Budget', 'Transport preference', 'Accommodation preference', 'Activities / interests', 'Special requirements'];
+    const fv = ['Japan', '18–26 Nov 2026', '8 days', '2 adults, 2 children', 'USD 4,000.00', 'Not set yet', 'Not set yet', 'Not set yet', 'Not set yet'];
+    return {
+      fieldsEmpty: fl.map(l => ({ l })),
+      fieldsFilled: fl.map((l, i) => ({ l, v: fv[i], c: fv[i] === 'Not set yet' ? 'mut' : 'val' })),
+      followUps: ['When are you traveling?', 'Who is coming, and how old are the children?', 'What is your total budget?'],
+      dests: [{ rank: 1, name: 'Tokyo', score: 92, reasons: ['Family attractions within 30 minutes by metro', 'Hotel supply fits USD 4,000.00 budget'] }, { rank: 2, name: 'Osaka', score: 84, reasons: ['Lower hotel prices than Tokyo', 'Universal Studios Japan for children'] }, { rank: 3, name: 'Kyoto', score: 78, reasons: ['Temples and gardens, 2h 15m from Tokyo by train', 'Autumn foliage in mid-November'] }],
+      ratingOpts: ['All', '4.5 and above', '4.0 and above', '3.5 and above'],
+      hotelCols, hotelRows, transCols, transRows,
+      modes: sel.map(n => { const a = on.includes(n); return { n, b: a ? '#0E6F8E' : '#DCE2E4', bg: a ? '#E1F0F4' : '#fff', fg: a ? '#0E6F8E' : '#566269' }; }),
+      savings: [{ t: 'Train instead of flight, Osaka to Tokyo', v: '180.00' }, { t: '4-star hotel instead of 5-star in Tokyo', v: '420.00' }],
+      days: [
+        { day: 1, date: '18 Nov 2026', morning: [it('Arrive at Haneda, transfer, check-in', '1h 30m', 'USD 35.00', '', '45m')], afternoon: [it('Asakusa and Senso-ji', '3h 00m', 'USD 0.00', 'Open 06:00–17:00', '30m')], evening: [it('Tokyo Skytree, dinner', '2h 30m', 'USD 120.00', 'Open until 21:00', '')] },
+        { day: 2, date: '19 Nov 2026', morning: [it('teamLab Planets', '2h 30m', 'USD 96.00', 'Open 09:00–22:00', '40m')], afternoon: [it('Toyosu market lunch', '1h 30m', 'USD 60.00', '', '20m')], evening: [it('Shinjuku Gyoen, dinner in Omoide Yokocho', '2h 00m', 'USD 85.00', '', '')] },
+        { day: 3, date: '20 Nov 2026', morning: [it('Shinkansen to Kyoto', '2h 15m', 'USD 112.00', 'Departs 09:03', '')], afternoon: [it('Fushimi Inari Shrine', '2h 30m', 'USD 0.00', 'Open 24 hours', '20m')], evening: [it('Gion walk, dinner', '2h 00m', 'USD 110.00', '', '')] }],
+      cats: [{ label: 'Hotels', amount: 1900 }, { label: 'Transport', amount: 1000 }, { label: 'Activities', amount: 600 }, { label: 'Food', amount: 700 }, { label: 'Local transport', amount: 300 }, { label: 'Misc', amount: 150 }],
+      amenities: ['Wifi', 'Pool', 'Spa', 'Gym', 'Restaurant', 'Bar', 'Airport shuttle', 'Family rooms'],
+      review: [{ l: 'Hotel', v: 'Park Hyatt Tokyo', w: 500 }, { l: 'Room', v: 'Twin Room', w: 500 }, { l: 'Dates', v: '18 Nov 2026 – 21 Nov 2026', w: 500 }, { l: 'Guests', v: '2 adults, 2 children', w: 500 }, { l: 'Total price', v: 'USD 765.00', w: 600 }],
+      done: [{ l: 'Booking reference', v: 'FR-48K2M9', w: 600 }, { l: 'Hotel', v: 'Park Hyatt Tokyo', w: 500 }, { l: 'Dates', v: '18 Nov 2026 – 21 Nov 2026', w: 500 }, { l: 'Final price', v: 'USD 765.00', w: 600 }],
+      trips: [{ title: 'Japan Family Trip', dates: '18–26 Nov 2026', hf: '#1F7A4D', hb: '#1F7A4D', tf: '#fff', tb: '#8C969B', total: 'USD 4,650.00' }, { title: 'Bali Getaway', dates: 'Not booked yet', hf: '#fff', hb: '#8C969B', tf: '#fff', tb: '#8C969B', total: 'USD 1,800.00' }, { title: 'Lisbon Long Weekend', dates: '6–9 Feb 2027', hf: '#1F7A4D', hb: '#1F7A4D', tf: '#1F7A4D', tb: '#1F7A4D', total: 'USD 1,240.00' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

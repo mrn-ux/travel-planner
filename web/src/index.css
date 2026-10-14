@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Colour themes. Components use the Tailwind tokens (bg-accent, border-border, ...); the themed tokens read these variables, so
+ * switching [data-theme] on <html> recolours the whole app. Each value is an "R G B" triplet.
+ * ocean is the original Faro palette; the others change the accent and the tint of backgrounds and borders.
+ */
+:root,
+[data-theme='ocean'] {
+  --c-bg: 247 249 249;
+  --c-muted: 238 241 242;
+  --c-border: 220 226 228;
+  --c-border-strong: 194 203 206;
+  --c-accent: 14 111 142;
+  --c-accent-hover: 10 88 113;
+  --c-accent-soft: 225 240 244;
+  --c-glow: 120 190 210;
+}
+[data-theme='sunset'] {
+  --c-bg: 253 248 244;
+  --c-muted: 247 238 231;
+  --c-border: 238 224 214;
+  --c-border-strong: 222 200 184;
+  --c-accent: 192 70 24;
+  --c-accent-hover: 156 54 16;
+  --c-accent-soft: 253 233 221;
+  --c-glow: 247 170 120;
+}
+[data-theme='forest'] {
+  --c-bg: 246 250 247;
+  --c-muted: 235 242 237;
+  --c-border: 215 228 219;
+  --c-border-strong: 188 206 194;
+  --c-accent: 38 110 70;
+  --c-accent-hover: 28 84 54;
+  --c-accent-soft: 225 241 230;
+  --c-glow: 140 200 160;
+}
+[data-theme='violet'] {
+  --c-bg: 249 247 251;
+  --c-muted: 241 238 245;
+  --c-border: 227 221 235;
+  --c-border-strong: 204 195 218;
+  --c-accent: 109 78 140;
+  --c-accent-hover: 85 58 112;
+  --c-accent-soft: 238 232 245;
+  --c-glow: 190 160 220;
+}
+
+@layer base {
+  body {
+    @apply bg-bg font-sans text-base font-semibold text-text;
+    /* A soft wash of the accent colour at the top fading into the page colour. */
+    background-image: linear-gradient(180deg, rgb(var(--c-accent-soft)) 0%, rgb(var(--c-bg)) 420px);
+    background-repeat: no-repeat;
+  }
+  /* Two large blurred glows of the theme colour sit behind the page: decoration only. */
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+    background: rgb(var(--c-glow));
+  }
+  body::before {
+    width: 420px;
+    height: 420px;
+    top: 80px;
+    right: -120px;
+  }
+  body::after {
+    width: 360px;
+    height: 360px;
+    bottom: -140px;
+    left: -100px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-focus-ring;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    main > div {
+      animation: faro-rise 0.35s ease-out both;
+    }
+  }
+}
+
+@keyframes faro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
